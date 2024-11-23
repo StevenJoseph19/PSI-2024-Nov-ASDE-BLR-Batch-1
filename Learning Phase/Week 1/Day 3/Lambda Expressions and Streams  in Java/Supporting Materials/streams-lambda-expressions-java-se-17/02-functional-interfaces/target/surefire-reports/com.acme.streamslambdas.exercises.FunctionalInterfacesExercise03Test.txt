@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.acme.streamslambdas.exercises.FunctionalInterfacesExercise03Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in com.acme.streamslambdas.exercises.FunctionalInterfacesExercise03Test
+calculate  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.UnsupportedOperationException: Not yet implemented
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise03Test.calculate(FunctionalInterfacesExercise03Test.java:16)
+

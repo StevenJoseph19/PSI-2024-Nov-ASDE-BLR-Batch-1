@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: com.acme.streamslambdas.exercises.FunctionalInterfacesExercise01Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.452 s <<< FAILURE! - in com.acme.streamslambdas.exercises.FunctionalInterfacesExercise01Test
+filterProducts  Time elapsed: 0.417 s  <<< FAILURE!
+java.lang.AssertionError: 
+[Exercise 1: When searching for FOOD products, only those should be returned.] 
+Expecting actual:
+  []
+to contain exactly (and in same order):
+  [FOOD       Apples           $   1.29,
+    FOOD       Spaghetti        $   2.79,
+    FOOD       Coffee           $   7.49]
+but could not find the following elements:
+  [FOOD       Apples           $   1.29,
+    FOOD       Spaghetti        $   2.79,
+    FOOD       Coffee           $   7.49]
+
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise01Test.filterProducts(FunctionalInterfacesExercise01Test.java:22)
+

@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.032 s <<< FAILURE! - in com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test
+searchByMaximumPrice  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.searchByMaximumPrice(FunctionalInterfacesExercise02Test.java:60)
+
+emptySearchCriteria  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.emptySearchCriteria(FunctionalInterfacesExercise02Test.java:96)
+
+searchByMinimumPrice  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.searchByMinimumPrice(FunctionalInterfacesExercise02Test.java:51)
+
+searchByPriceBetween  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.searchByPriceBetween(FunctionalInterfacesExercise02Test.java:69)
+
+searchByName  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.searchByName(FunctionalInterfacesExercise02Test.java:33)
+
+searchByCategory  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.searchByCategory(FunctionalInterfacesExercise02Test.java:24)
+
+emptyResult  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.emptyResult(FunctionalInterfacesExercise02Test.java:87)
+
+searchByAllCriteria  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.searchByAllCriteria(FunctionalInterfacesExercise02Test.java:78)
+
+searchByCategoryAndName  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.acme.streamslambdas.exercises.FunctionalInterfacesExercise02Test.searchByCategoryAndName(FunctionalInterfacesExercise02Test.java:42)
+

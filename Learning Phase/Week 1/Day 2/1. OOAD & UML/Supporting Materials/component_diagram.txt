@@ -1,0 +1,25 @@
++ Browse Books: Component
++ Search Books: Component
++ Change Password: Component
++ Place Order: Component
++ View User Orders: Component
++ Add Book To Order: Component
++ Cancel Order: Component
++ Complete Order: Component
++ Get Order by ID: Component
++ Get All Orders: Component
+
+=======================================================
+
++ addBook: Promise
++ getAllBooks: Promise
++ searchBooks: Promise
++ changePassword: Promise
++ placeOrder: Promise
++ addBookToOrder: Promise
++ removeBookFromOrder: Promise
++ completeOrder: Promise
++ getOrderById: Promise
++ getAllOrders: Promise
+
+========================================================
