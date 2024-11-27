@@ -1,3 +1,18 @@
+================
+Admin Dashboard
+================
++ Add Book: Component
++ Update Book: Component
++ Remove Book: Component
++ Add User: Component
++ Update User: Component
++ Remove User: Component
++ View All Users: Component
++ Insert Books From CSV: Component
+
+================
+User Dashboard
+================
 + Browse Books: Component
 + Search Books: Component
 + Change Password: Component
@@ -10,7 +25,8 @@
 + Get All Orders: Component
 
 =======================================================
-
+APIService
+=======================================================
 + addBook: Promise
 + getAllBooks: Promise
 + searchBooks: Promise
