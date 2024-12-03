@@ -16,29 +16,27 @@ Add bin folder to PATH
 =========================
 (On Windows 10) Add C:\Program Files\MongoDB\Server\7.0\bin to PATH Environment Variable.
 
-Start Mongod daemon
+Mongod help
 ====================
-mongod 
 mongod --help
 
-Terminate Server
-=======================
-CTRL + C
-
 Use an elevated command prompt 
-====================================
-Manually start the MongoDB service
-====================================
-net start mongodb
-
+===================================
 Check that the MongoDB service is running
 ==========================================
 net start  | findstr Mongo
 
+=======================
 Stop the service
 =======================
 net stop mongodb 
+====================================
 
+Manually start the MongoDB service
+====================================
+net start mongodb
+
+=========================================
 Connect to server using the Mongo shell
 ==========================================
 Install mongosh
@@ -132,9 +130,13 @@ Start mongo daemon with configuration file
 ============================================
 C:\>mongod -f C:\MyData\mongod.conf
 
+Terminate Server
+==========================================
+CTRL + C
+
 Configuring a Replica Set
 ==============================================
-Run ReplicaSet.bat
+Run ReplicaSet.bat from C:\MyData
 
 Start Mongo Shell
 =============================================
