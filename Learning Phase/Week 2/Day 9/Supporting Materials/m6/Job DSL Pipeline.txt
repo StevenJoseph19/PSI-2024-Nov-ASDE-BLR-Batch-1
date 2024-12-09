@@ -22,8 +22,8 @@ pipeline {
                             branchSources {
                                 git {
                                     id('unique-id-${BRANCH_NAME}') // Unique ID per branch
-                                    remote('https://github.com/your-repo/your-project.git')
-                                    credentialsId('your-credentials-id')
+                                    remote('https://tools.publicis.sapient.com/bitbucket/scm/psnb/jenkins-steve.git')
+                                    credentialsId( 'jenkins-bitbucket')
                                 }
                             }
                             orphanedItemStrategy {
@@ -31,9 +31,11 @@ pipeline {
                                     numToKeep(5)
                                 }
                             }
-                            triggers {
-                                periodic(1)
-                            }
+                             triggers {
+                                           periodicFolderTrigger {
+                                               interval('1d') // Sets periodic re-indexing to 1 day
+                                             }
+                                         }
                         }
                     """
                 }
@@ -41,6 +43,29 @@ pipeline {
         }
     }
 }
+/*
+The periodicFolderTrigger is a trigger designed for multibranch pipeline jobs.
+It periodically scans the repository for changes across branches and automatically updates the job configuration or builds as necessary.
+triggers Block
+
+This is where you define any triggers for the multibranch pipeline job. These triggers determine when Jenkins should take action, such as scanning for branch changes or scheduling builds.
+periodicFolderTrigger
+
+Specifically tailored for Folder-based jobs like multibranch pipelines.
+It schedules a periodic scan of the branch sources (like Git or Bitbucket) to:
+Discover new branches or repositories.
+Remove branches that no longer exist.
+Update the configuration of existing branches.
+interval('1d')
+
+Defines how often the scan should happen.
+1d means the scan will occur once a day.
+Other valid formats include:
+1h for hourly scans.
+12h for every 12 hours.
+7d for weekly scans.
+This helps to keep branch configurations and builds up-to-date without needing manual intervention. */
+
 ====================================================================================
 Adding the DSL Script to Jenkins
 Install the Job DSL Plugin (if not already installed).

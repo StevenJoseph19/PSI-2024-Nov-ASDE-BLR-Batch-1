@@ -1,3 +1,5 @@
+git config --system core.longpaths true
+
 git config --global core.longpaths true
 
 
