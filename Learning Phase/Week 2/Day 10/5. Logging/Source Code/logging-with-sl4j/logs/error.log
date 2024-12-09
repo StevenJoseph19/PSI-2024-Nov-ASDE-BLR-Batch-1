@@ -1,0 +1,3 @@
+2024-12-08 22:09:14 [ERROR] [com.example.LoggingSeparationExample] - Error occurred: Something went wrong!
+java.lang.RuntimeException: Something went wrong!
+	at com.example.LoggingSeparationExample.main(LoggingSeparationExample.java:17)

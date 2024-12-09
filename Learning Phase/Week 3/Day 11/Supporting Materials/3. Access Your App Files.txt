@@ -1,0 +1,37 @@
+To access your app files from Ubuntu in VSCode Integrated Teminal:
+
+If the files are on your Windows drive (e.g., C:\my-app), you can access them in WSL at /mnt/c/my-app.
+Navigate to your app directory
+
+e.g.:  cd /mnt/d/Test/DevOps/Docker/Sapient/NodeExpressMongoDBDockerApp
+
+Build and Run Docker Containers
+Build the Docker image:
+docker-compose build
+
+Run containers with Docker Compose:
+docker-compose up
+
+Test Your Setup
+Once everything is running:
+
+Access your app (e.g., at http://localhost:3000).
+Check running containers.
+
+docker ps
+
+Removing Container and Image of hello-world
+
+Remove the Container
+
+docker rm <container_id_or_name>
+like:
+docker rm 808d01caf1bf
+
+Remove the Image
+
+docker rmi <image_id_or_name>
+like:
+docker rmi hello-world
+
+docker ps -a      # list all Docker containers on your system, including both running and stopped containers.

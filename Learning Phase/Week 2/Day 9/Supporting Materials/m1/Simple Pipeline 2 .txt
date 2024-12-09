@@ -1,0 +1,36 @@
+Dashboard->Simple Pipeline->Configuration
+
+A simple pipeline to demonstrate basic stages
+
+String Parameter
+DEPLOY_ENV
+staging
+Deployment Environment
+
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: 'Deployment Environment')
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying to ${params.DEPLOY_ENV} environment..."
+            }
+        }
+    }
+}

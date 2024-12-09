@@ -1,0 +1,60 @@
+A simple pipeline using a Bitbucket repository.
+
+pipeline {
+    agent any
+
+    environment {
+        MAVEN_HOME = 'D:/InstalledSoftware/apache-maven-3.9.9'
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}" // Ensure Maven is available in PATH
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'master', 
+                    url: 'https://tools.publicis.sapient.com/bitbucket/scm/psnb/jenkins-steve.git', 
+                    credentialsId: 'jenkins-bitbucket'
+            }
+        }
+
+        stage('Check Environment Variables') {
+            steps {
+                // Using sh to check environment variables
+                sh 'echo "PATH=$PATH"'
+                sh 'echo "MAVEN_HOME=$MAVEN_HOME"'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('02-functional-interfaces') { 
+                    // Skip tests and build the JAR
+                    sh 'mvn clean install -DskipTests'
+                }
+            }
+        }
+
+        // stage('Test') {
+        //     steps {
+        //         dir('02-functional-interfaces') {
+        //             sh 'mvn test' // Run tests if you need to at some point
+        //         }
+        //     }
+        // }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline execution failed!'
+        }
+    }
+}

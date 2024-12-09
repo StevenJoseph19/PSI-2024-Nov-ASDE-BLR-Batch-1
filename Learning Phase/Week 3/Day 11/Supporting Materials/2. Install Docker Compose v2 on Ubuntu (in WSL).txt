@@ -1,0 +1,35 @@
+Prerequisites
+Ensure Docker is installed and running on your Ubuntu setup. Verify by running:
+docker --version
+
+
+Install Docker Compose v2 Plugin
+Run the following commands:
+
+Install the Docker Compose plugin:
+sudo apt update
+sudo apt install -y docker-compose-plugin
+
+
+Verify the installation:
+docker compose version
+
+You should see output like:
+Docker Compose version v2.x.x
+
+Use Docker Compose v2
+Now you can use the docker compose commands (with a space) to manage your containers. For example:
+
+Bring the app:
+docker compose build
+
+Bring up services:
+docker compose up
+
+Tear down services:
+docker compose down
+
+Test with Your Application
+Navigate to your application directory and try running:
+docker compose up
+

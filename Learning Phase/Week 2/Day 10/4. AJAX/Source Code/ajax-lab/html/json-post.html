@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Send/Receive JSON</title>
+</head>
+
+<body>
+    <h1>AJAX Send and Receive JSON Data</h1>
+    <button onclick="sendJsonData()">Send JSON Data</button>
+    <div id="response"></div>
+
+    <script>
+        function sendJsonData() {
+            // Step 1: Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Step 2: Open a POST request to the server endpoint
+            xhr.open('POST', 'http://localhost:3000/send-json', true);
+
+            // Step 3: Set the Content-Type header to indicate JSON
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // Step 4: Set up the event handler to process the server's response
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText); // Parse the JSON response
+                    document.getElementById('response').innerHTML = `
+                        <h3>Server Response:</h3>
+                        <p>${response.message}</p>
+                        <pre>${JSON.stringify(response.receivedData, null, 2)}</pre>
+                    `;
+                }
+            };
+
+            // Step 5: Create a JSON object to send
+            var data = {
+                userId: 1,
+                title: 'Test Post',
+                body: 'This is a test post with JSON data.'
+            };
+
+            // Step 6: Send the request with the JSON data
+            xhr.send(JSON.stringify(data)); // Send the data as a JSON string
+        }
+    </script>
+</body>
+
+</html>
+
+<!-- This code creates a simple client interface where a button triggers the sending of JSON data.
+When the button is clicked, the sendJsonData() function:
+Creates an XMLHttpRequest object.
+Opens a POST request to the server (http://localhost:3000/send-json).
+Sets the request header to indicate that the data is in JSON format.
+Sends the JSON data to the server.
+When the response is received, it parses the JSON response and displays it on the page. -->

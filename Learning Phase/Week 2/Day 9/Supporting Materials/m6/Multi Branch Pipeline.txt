@@ -1,0 +1,86 @@
+@Library('jenkins-steve-library') _
+
+pipeline {
+    agent any 
+    
+    environment {
+        JENKINS_URL = 'http://localhost:8080'
+        JENKINS_USER = 'admin'  // Replace with your Jenkins username
+        JENKINS_PASSWORD = 'password'  // Replace with your Jenkins password
+    }
+
+    stages {
+        stage('Validate Jenkinsfile') {
+            steps {
+                script {
+                    def jenkinsfilePath = 'spring-boot-unit-test-rest-controller/Jenkinsfile'
+                    
+                    // Use curl directly to validate the Jenkinsfile
+                    def response = sh(script: """
+                        curl --user ${JENKINS_USER}:${JENKINS_PASSWORD} -X POST -F "jenkinsfile=<${jenkinsfilePath}" ${JENKINS_URL}/pipeline-model-converter/validate
+                    """, returnStdout: true).trim()
+
+                    echo "Validation Response: ${response}"
+                    
+                    if (response.contains('Jenkinsfile successfully validated')) {
+                        echo 'Jenkinsfile validation passed!'
+                    } else {
+                        error 'Jenkinsfile validation failed!'
+                    }
+                }
+            }
+        }
+
+        stage('Checkout Code') {
+            steps {
+                script {
+                    // Checkout code from the repository
+                    mylibrary.checkoutCode(
+                        'master',
+                        'https://tools.publicis.sapient.com/bitbucket/scm/psnb/jenkins-steve.git',
+                        'jenkins-bitbucket'
+                    )
+                }
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                script {
+                    // Build application in 'spring-boot-unit-test-rest-controller' directory
+                    mylibrary.buildApplication('spring-boot-unit-test-rest-controller', '-DskipTests')
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Run tests in 'spring-boot-unit-test-rest-controller' directory
+                    mylibrary.runTests('spring-boot-unit-test-rest-controller')
+                }
+
+                // Collect JUnit test results
+                junit '**/target/surefire-reports/*.xml'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                script {
+                    // Archive artifacts in 'spring-boot-unit-test-rest-controller' directory
+                    mylibrary.archiveArtifactsStep('spring-boot-unit-test-rest-controller', 'target/*.jar')
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline execution failed!'
+        }
+    }
+}

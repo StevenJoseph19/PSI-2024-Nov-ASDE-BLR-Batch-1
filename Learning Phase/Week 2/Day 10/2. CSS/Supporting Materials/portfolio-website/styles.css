@@ -1,0 +1,145 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-color: #f0f8ff;
+  color: #333;
+}
+
+/* Header Styles */
+header {
+  background: linear-gradient(90deg, #4caf50, #388e3c);
+  color: #fff;
+  padding: 1.5rem 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+header nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #c8e6c9;
+}
+
+/* Section Styles */
+section {
+  padding: 3rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.project {
+  width: 48%;
+  margin: 1% 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Print-Friendly Styles */
+@media print {
+  header,
+  footer,
+  nav,
+  .project:hover {
+    display: none;
+  }
+  body {
+    background-color: white;
+    color: black;
+  }
+  section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .project {
+    border: none;
+    padding: 0.5rem;
+    box-shadow: none;
+  }
+  body,
+  h1,
+  h2,
+  h3,
+  p {
+    font-size: 12pt;
+  }
+  section {
+    page-break-after: always;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  header {
+    font-size: 1.2rem;
+  }
+  section {
+    padding: 2rem;
+  }
+  .project {
+    margin: 1rem 0;
+  }
+}
+
+/* For Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  header {
+    font-size: 1rem;
+  }
+  .project {
+    width: 100%; /* Make projects stack on small screens */
+  }
+  form {
+    padding: 0.5rem;
+  }
+  input[type='submit'] {
+    padding: 0.5rem 1rem; /* Smaller button padding */
+  }
+}
+
+/* Media Query for tablet (768px and below) */
+@media (max-width: 768px) {
+  header {
+    font-size: 1.2rem; /* Adjust font size */
+  }
+
+  section {
+    padding: 2rem; /* Adjust padding for tablets */
+  }
+
+  .project {
+    margin: 1rem 0; /* Smaller margins for tablet */
+  }
+
+  form {
+    padding: 1rem; /* Reduced padding for smaller screens */
+  }
+}

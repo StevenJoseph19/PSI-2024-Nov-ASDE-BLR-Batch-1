@@ -1,0 +1,58 @@
+microk8s kubectl get svc
+
+microk8s kubectl get pods
+
+microk8s kubectl delete pod hello-pod
+
+microk8s kubectl apply -f deploy.yml
+
+microk8s kubectl get pods
+
+microk8s kubectl get deploy
+
+microk8s kubectl get rs
+
+microk8s kubectl delete pod web-deploy-84747cf8bf-8vm2q
+
+microk8s kubectl get nodes
+
+microk8s kubectl get pods -o wide
+
+New Ubuntu Terminal
+=========================
+
+microk8s kubectl apply -f deploy-complete.yml
+
+Split Terminal
+==============================
+Terminal 1 
+============
+
+microk8s kubectl get pods --watch
+
+Terminal 2
+============
+
+microk8s kubectl rollout status deploy web-deploy
+
+You can also run:
+microk8s kubectl get pods --selector=app=web --watch
+
+microk8s kubectl get rs
+
+microk8s kubectl describe rs web-deploy-84747cf8bf # Old replica set
+
+microk8s kubectl rollout history deploy web-deploy
+
+microk8s kubectl rollout undo deploy web-deploy --to-revision 1
+
+microk8s kubectl get rs
+
+
+ microk8s stop
+
+********************************************************************************************
+
+
+
+

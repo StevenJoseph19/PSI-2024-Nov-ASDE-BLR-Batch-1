@@ -1,0 +1,42 @@
+microk8s kubectl get pods 
+
+microk8s kubectl get pods -o wide
+
+microk8s kubectl expose pod hello-pod --name=hello-svc --target-port=8080 --type=NodePort
+
+microk8s kubectl get svc    
+
+http://<WSL2_IP>:<NodePort> 
+# Replace <WSL2_IP> with the IP address assigned to your WSL2 instance. 
+# To find this IP address, you can run: 
+  
+hostname -I 
+
+Check iptables-legacy Rules in case of no access
+
+sudo iptables-legacy -t nat -L -n 
+  
+microk8s kubectl delete svc hello-svc
+
+microk8s kubectl get pods 
+
+microk8s kubectl get pods --show-labels
+
+cd Services
+microk8s kubectl apply -f svc-nodeport.yml
+
+microk8s kubectl describe svc ps-nodeport    
+
+
+
+
+
+
+
+
+
+
+
+
+
+

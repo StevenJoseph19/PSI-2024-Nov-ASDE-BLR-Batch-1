@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    environment {
+        BRANCH_NAME = "${env.BRANCH_NAME}" // Dynamically fetch the branch name
+    }
+
+    stages {
+        stage('Print Branch Name') {
+            steps {
+                script {
+                    echo "Running on branch: ${BRANCH_NAME}"
+                }
+            }
+        }
+
+        stage('Create Multibranch Pipeline Job') {
+            steps {
+                script {
+                    jobDsl scriptText: """
+                        multibranchPipelineJob('Multi Branch Pipeline-${BRANCH_NAME}') {
+                            branchSources {
+                                git {
+                                    id('unique-id-${BRANCH_NAME}') // Unique ID per branch
+                                    remote('https://github.com/your-repo/your-project.git')
+                                    credentialsId('your-credentials-id')
+                                }
+                            }
+                            orphanedItemStrategy {
+                                discardOldItems {
+                                    numToKeep(5)
+                                }
+                            }
+                            triggers {
+                                periodic(1)
+                            }
+                        }
+                    """
+                }
+            }
+        }
+    }
+}
+====================================================================================
+Adding the DSL Script to Jenkins
+Install the Job DSL Plugin (if not already installed).
+====================================================================================
+Dynamic and Scalable Job Creation:
+
+The Job DSL plugin is particularly useful for dynamically creating multiple jobs 
+(e.g., per branch or microservice) without manual intervention.
+In this example, creating multibranch pipeline jobs for each branch dynamically 
+based on the branch name is a perfect use case for Job DSL.
+=====================================================================================
+Approve the DSL Script
+Go to Manage Jenkins > In-process Script Approval.
+Review the pending scripts and approve the ones you trust. Your script should appear in the list.
+Once approved, re-run the pipeline.
+======================================================================================

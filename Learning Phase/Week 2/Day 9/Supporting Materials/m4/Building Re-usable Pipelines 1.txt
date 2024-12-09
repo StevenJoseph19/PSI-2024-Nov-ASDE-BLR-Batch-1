@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                echo 'Checking out the code from repository...'
+                git branch: 'master', 
+                url: 'https://tools.publicis.sapient.com/bitbucket/scm/psnb/jenkins-steve.git', 
+                credentialsId: 'jenkins-bitbucket'
+          }
+        }
+
+
+        stage('Build Application') {
+            steps {
+                dir('spring-boot-unit-test-rest-controller') { 
+                    // Skip tests and build the JAR
+                    sh 'mvn clean install -DskipTests'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                dir('spring-boot-unit-test-rest-controller') {
+                    echo 'Running tests...'
+                    sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                dir('spring-boot-unit-test-rest-controller') {
+                    echo 'Archiving build artifacts...'
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and testing completed successfully!'
+        }
+        failure {
+            echo 'Build or testing failed!'
+        }
+        always {
+            echo 'Pipeline execution completed.'
+        }
+    }
+}

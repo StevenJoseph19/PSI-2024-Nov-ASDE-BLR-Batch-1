@@ -1,0 +1,290 @@
+===========================================
+2. Setting up Your Development Environment
+===========================================
+
+docker ps -a
+
+docker exec -it 0e34f7b3ea37 sh
+
+/var/www # ls
+
+/var/www # node dbSeeder.js
+
+^C
+
+/var/www # exit
+
+cd /mnt/d/Test/DevOps/Docker/Sapient/NodeExpressMongoDBDockerApp
+
+docker compose down 
+
+docker ps -a
+
+===========================================
+3. Create an Application Image
+===========================================
+
+wsl2ubuntu@Stephen-Samuels:/mnt/d/Test/DevOps/Docker/Sapient/NodeExpressMongoDBDockerApp$ docker build -t nodeapp .docker build -t nodeapp .
+
+
+Rename node.dockerfile to Dockerfile
+
+docker build -t nodeapp .docker build -t nodeapp .
+
+docker images
+
+docker rmi < IMAGE ID >
+
+Rename Dockerfile to node.dockerfile 
+
+docker build -t nodeapp:1.0 -f node.dockerfile .
+
+docker images
+
+docker rmi < IMAGE ID >
+
+docker rmi -f < IMAGE ID > # Force remove (if necessary)
+
+docker build -t stevesam/nodeapp:1.0 -f node.dockerfile .
+
+docker build -t stevesam/nodeapp:1.0 -f node.dockerfile .
+
+docker images
+
+docker login -u <username>
+
+Password: <docker hub password for your account>
+
+docker push stevesam/nodeapp:1.0
+
+===========================================
+4. Run an Application Container
+===========================================
+
+
+wsl2ubuntu@Stephen-Samuels:/mnt/d/Test/DevOps/Docker/Sapient/NodeExpressMongoDBDockerApp$ cd ~
+
+wsl2ubuntu@Stephen-Samuels:~$ docker pull nginx:alpine
+
+docker run --help
+
+docker images
+
+docker run -p 8080:80 -d nginx:alpine
+
+docker ps
+
+docker stop 33
+
+docker ps
+
+docker ps -a
+
+docker rm 33
+
+docker ps -a
+
+docker images
+
+docker pull stevesam/nodeapp:2.0
+
+docker run -p 3000:3000 -d  stevesam/nodeapp:2.0
+
+docker ps -a
+
+docker logs f1
+
+docker ps -a
+
+docker rm f1
+
+docker ps -a
+
+docker run -p 3000:3000  stevesam/nodeapp:2.0
+
+docker ps -a
+
+docker logs f7
+
+
+docker run -p 8080:80 nginx:alpine
+
+ ^C
+
+docker ps
+
+
+docker ps -a
+
+docker rm 68
+
+docker ps -a
+
+cd nginx
+
+docker run -p 8080:80 -v ${PWD}:/usr/share/nginx/html nginx:alpine
+
+===========================================
+5. Communicate between Multiple Containers
+===========================================
+
+docker network ls
+
+docker network create --driver bridge isolated_network
+
+docker network ls
+
+docker run -d --net=isolated_network --name mongodb mongo
+
+docker ps
+
+docker run -d --net=isolated_network --name nodeapp -p 3000:3000 -v $(pwd)/logs:/var/www/logs stevesam/nodeapp:2.0
+
+docker ps
+
+docker logs af3
+
+docker network ls
+
+docker network
+
+docker network inspect 28f
+
+docker ps
+
+docker exec -it nodeapp sh
+
+ls
+
+/var/www # node dbSeeder.js
+
+^C
+/var/www # ls
+
+/var/www # cd ..
+/var # ls
+
+/var # cd www
+/var/www # ls
+
+/var/www # exit
+
+wsl2ubuntu@Stephen-Samuels:/mnt/d/Test/DevOps/Docker/Sapient/NodeExpressMongoDBDockerApp$ docker compose --help
+
+docker ps
+
+docker stop ef7 # Stop container mongodb
+
+docker rm ef7   # Remove container mongodb
+
+docker ps	# Verify container was removed
+
+
+docker stop ef7 # Stop container nodeapp
+
+docker rm ef7   # Remove container nodeapp
+
+docker ps	# Verify container was removed
+
+
+docker compose build
+
+docker compose up
+
+docker ps
+
+docker compose down
+
+docker ps
+
+docker ps -a
+
+After using Docker Extension for VSCode
+=========================================
+# after docker compose up
+docker ps -a # Verify containers were started
+
+
+# after docker compose down
+docker ps -a # Verify containers were removed
+
+===============================================================
+Monitor Disk Usage
+Before cleaning up, you can see how much space Docker is using:
+
+docker system df
+
+Remove Unused Volumes
+To clean up volumes that are no longer associated with any container, run:
+
+docker volume prune
+
+Unused Networks:
+Docker networks that are not in use by any container.
+
+docker network ls
+
+docker network prune
+
+Build Cache:
+Cached layers from Docker builds that are no longer needed.
+
+docker builder prune
+
+docker system df
+
+=======================================================================
+
+Automate Cleanup with a Single Command
+To remove all unused resources, including images, containers, volumes, networks, and build cache, use:
+
+docker system prune
+
+docker system prune --volumes # Does everything that docker system prune does and additionally removes unused volumes.
+
+To force the cleanup without confirmation prompts:
+
+docker system prune -f
+
+To include unused volumes in the cleanup:
+
+docker system prune --volumes
+
+********************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

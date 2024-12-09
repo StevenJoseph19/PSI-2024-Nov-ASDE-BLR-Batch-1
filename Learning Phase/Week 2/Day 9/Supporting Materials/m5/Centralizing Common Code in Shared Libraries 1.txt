@@ -1,0 +1,105 @@
+(root)
+├── src
+|   └── org
+|      └── example
+|          └── utilities.groovy
+vars
+  └── myLibrary.groovy
+
+
+====================================================
+myLibrary.groovy
+===================================================
+
+def checkoutCode(String branch, String repoUrl, String credentialsId) {
+    echo "Checking out branch ${branch} from ${repoUrl}..."
+    git branch: branch, url: repoUrl, credentialsId: credentialsId
+}
+
+def buildApplication(String directory, String args) {
+    dir(directory) {
+        echo "Building application in ${directory} with args: ${args}..."
+        sh "mvn clean install ${args}"
+    }
+}
+
+def runTests(String directory) {
+    dir(directory) {
+        echo "Running tests in ${directory}..."
+        sh 'mvn test'
+    }
+}
+
+def archiveArtifactsStep(String directory, String pattern) {
+    dir(directory) {
+        echo "Archiving artifacts matching pattern ${pattern}..."
+        archiveArtifacts artifacts: pattern, fingerprint: true
+    }
+}
+================================================================
+
+Push Changes to the Repository
+Add the new files to your repository:
+
+git add .
+git commit -m "Add shared library structure"
+git push origin master
+
+=====================================================================
+
+Configure the Shared Library in Jenkins
+Go to Manage Jenkins > System > Global Trusted Pipeline Libraries.
+Add the following:
+Name: jenkins-steve-library (or any other name).
+Default Version: master (or specify the branch with the shared library).
+Source Code Management: Add the Git repository URL for jenkins-steve
+=======================================================================
+
+@Library('jenkins-steve-library') _
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                script {
+                    myLibrary.checkoutCode('master', 'https://tools.publicis.sapient.com/bitbucket/scm/psnb/jenkins-steve.git', 'jenkins-bitbucket')
+                }
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                script {
+                    mylibrary.buildApplication('02-functional-interfaces', '-DskipTests')
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    myLibrary.runTests('02-functional-interfaces')
+                }
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                script {
+                    myLibrary.archiveArtifactsStep('02-functional-interfaces', 'target/*.jar')
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
+========================================================================================================

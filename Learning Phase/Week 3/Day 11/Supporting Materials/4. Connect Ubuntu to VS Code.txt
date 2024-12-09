@@ -1,0 +1,22 @@
+Install the "Visual Studio Code WSL" extension in VS Code:
+
+Open VS Code, go to the Extensions tab, and search for WSL.
+Install the extension.
+
+Open VS Code from WSL:
+
+Launch your Ubuntu instance in WSL2.
+Navigate to the sample project
+eg:  cd /mnt/d/Test/DevOps/Docker/Sapient/NodeExpressMongoDBDockerApp
+
+From the Ubuntu terminal, run:
+
+code .
+
+Install Docker Extension in VS Code
+
+In VS Code, go to the Extensions view (Ctrl + Shift + X).
+Search for Docker and install the official extension by Microsoft.
+
+
+Now, you can use the Integrated Terminal and run Docker commands in WSL2:Ubuntu.

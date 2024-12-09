@@ -1,0 +1,9 @@
+2024-12-08 21:56:47 [INFO] [main] [LoggingExample] - This is an INFO level message
+2024-12-08 21:56:47 [WARN] [main] [LoggingExample] - This is a WARN level message
+2024-12-08 21:56:47 [ERROR] [main] [LoggingExample] - This is an ERROR level message
+2024-12-08 21:58:40 [INFO] [main] [LoggingExample] - This is an INFO level message
+2024-12-08 21:58:40 [WARN] [main] [LoggingExample] - This is a WARN level message
+2024-12-08 21:58:40 [ERROR] [main] [LoggingExample] - This is an ERROR level message
+2024-12-08 21:58:40 [ERROR] [main] [LoggingExample] - Exception occurred: 
+java.lang.RuntimeException: Test exception
+	at LoggingExample.main(LoggingExample.java:18)

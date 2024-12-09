@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX POST Request Example</title>
+</head>
+
+<body>
+    <h1>AJAX POST Request: Send Data to Server</h1>
+    <button onclick="sendPostRequest()">Send POST Request</button>
+    <div id="response"></div>
+
+    <script>
+        // Function to send a POST request with data
+        function sendPostRequest() {
+            // Step 1: Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Step 2: Configure the request (POST method to a specific URL)
+            xhr.open('POST', 'https://jsonplaceholder.typicode.com/posts', true);
+
+            // Step 3: Set the request header to indicate we are sending JSON data
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // Step 4: Set up an event listener to handle the response
+            xhr.onreadystatechange = function () {
+                // Step 5: Check if the request is completed (readyState === 4) and successful (status === 201)
+                if (xhr.readyState === 4 && xhr.status === 201) {
+                    // Step 6: Parse and display the server's response
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById('response').innerHTML =
+                        '<h3>Response:</h3>' +
+                        '<p>Post ID: ' + response.id + '</p>' +
+                        '<p>Title: ' + response.title + '</p>' +
+                        '<p>Body: ' + response.body + '</p>';
+                }
+            };
+
+            // Step 7: Create the data to send in the POST request (JSON format)
+            var data = JSON.stringify({
+                title: 'foo',
+                body: 'bar',
+                userId: 1
+            });
+
+            // Step 8: Send the POST request with the data
+            xhr.send(data);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example</title>
+</head>
+<body>
+<h1>AJAX Example: Fetch User Data</h1>
+<button onclick="fetchUserData()">Get User Data</button>
+<div id="user-data"></div>
+
+<script>
+    // This function is called when the button is clicked to fetch user data via AJAX
+    function fetchUserData() {
+        // Step 1: Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Step 2: Configure the GET request to the API endpoint
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users/1', true);
+
+        // Step 3: Set up an event listener to handle the response once it's received
+        xhr.onreadystatechange = function() {
+            // Step 4: Check if the request has completed successfully
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Step 5: Parse the JSON response and display it on the page
+                var user = JSON.parse(xhr.responseText);
+                document.getElementById('user-data').innerHTML =
+                    '<h2>User Data:</h2>' +
+                    '<p>Name: ' + user.name + '</p>' +
+                    '<p>Email: ' + user.email + '</p>';
+            }
+        };
+
+        // Step 6: Send the request to the server
+        xhr.send();
+    }
+</script>
+</body>
+</html>

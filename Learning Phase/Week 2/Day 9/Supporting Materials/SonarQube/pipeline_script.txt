@@ -1,0 +1,29 @@
+pipeline{
+    agent any
+    environment {
+        PATH = "$PATH:D:/InstalledSoftware/apache-maven-3.9.9/bin"
+    }
+    stages{
+       stage('GetCode'){
+            steps{
+        
+                git branch: 'main',  url: 'https://github.com/spring-projects/spring-petclinic.git'
+            }
+         }        
+       stage('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+         }
+        stage('SonarQube analysis') {
+
+        steps{
+
+         withSonarQubeEnv('SonarScanner') { 
+        sh "mvn sonar:sonar"
+    		}
+     	   }
+        }
+       
+    }
+}

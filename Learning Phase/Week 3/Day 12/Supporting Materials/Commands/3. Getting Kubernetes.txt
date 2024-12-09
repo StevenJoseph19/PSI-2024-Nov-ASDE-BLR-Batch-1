@@ -1,0 +1,52 @@
+Setting up  Kubernetes with MicroK8s on your Ubuntu system 
+============================================================
+
+Install MicroK8s on Linux
+
+sudo snap install microk8s --classic
+
+
+Add your user to the microk8s admin group
+MicroK8s creates a group to enable seamless usage of commands which require admin privilege. Use the following commands to join the group:
+
+sudo usermod -a -G microk8s $USER
+sudo chown -f -R $USER ~/.kube
+
+You will also need to re-enter the session for the group update to take place:
+
+su - $USER
+
+
+Check the status while Kubernetes starts
+
+microk8s status --wait-ready
+
+Turn on the services you want
+
+microk8s enable dashboard dns ingress
+
+Try microk8s enable --help for a list of available services and optional features. microk8s disable ‹name› turns off a service.
+
+Start using Kubernetes
+
+microk8s kubectl version 
+
+microk8s kubectl get nodes
+
+microk8s kubectl get all --all-namespaces
+
+Access the Kubernetes dashboard
+
+microk8s dashboard-proxy
+
+Start and stop Kubernetes to save battery
+
+
+Kubernetes is a collection of system services that talk to each other all the time. 
+If you don’t need them running in the background then you will save battery by stopping them. 
+microk8s start and microk8s stop
+will do the work for you.
+
+
+
+********************************************************************************************************

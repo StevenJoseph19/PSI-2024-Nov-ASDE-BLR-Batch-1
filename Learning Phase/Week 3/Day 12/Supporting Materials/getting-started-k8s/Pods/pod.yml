@@ -1,0 +1,14 @@
+# Simple Kubernetes Pod to deploy the app contained in nigelpoulton/getting-started-k8s:1.0
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  labels:
+    app: web
+spec:
+  containers:
+    - name: web-ctr
+      image: stevesam/getting-started-k8s:1.0
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 8080

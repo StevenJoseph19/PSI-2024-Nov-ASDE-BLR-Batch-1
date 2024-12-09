@@ -1,0 +1,12 @@
+Explore pipeline development tools provided by Jenkins and the community.
+Jenkinsfile Linter
+Pipeline Replay Feature
+Unit Testing Framework for Shared Libraries
+Prerequisites:
+A Jenkins instance is already set up.
+A Bitbucket or GitHub repository with a shared library structure (e.g., jenkins-steve).
+A basic Jenkins pipeline project, like spring-boot-unit-test-rest-controller, with a functional Jenkinsfile.
+
+Use mylibrary.groovy for reusable pipeline steps.
+Validate the library using pipeline tools: Jenkinsfile Linter, Replay, and Unit Testing.
+11cac46b45e4c0f7ad3d8d458649181ae9

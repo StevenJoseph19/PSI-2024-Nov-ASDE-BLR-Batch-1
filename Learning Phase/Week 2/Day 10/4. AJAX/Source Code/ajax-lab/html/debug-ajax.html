@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Debugging Example</title>
+</head>
+
+<body>
+    <h2>AJAX Debugging Example</h2>
+    <button onclick="sendJsonData()">Send JSON Data</button>
+
+    <script>
+        function sendJsonData() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:3000/send-json', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // Event listener for readyState change
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) { // Ensure request is complete
+                    if (xhr.status === 200) { // Check if status is 200 OK
+                        console.log('Success:', xhr.responseText); // Log successful response
+                    } else {
+                        console.log('Error:', xhr.status, xhr.statusText); // Log errors
+                    }
+                }
+            };
+
+            // Log the data you're sending for debugging
+            const data = JSON.stringify({ title: 'foo', body: 'bar', userId: 1 });
+            console.log('Sending data:', data);
+
+            // Send request with data
+            xhr.send(data);
+        }
+    </script>
+</body>
+
+</html>

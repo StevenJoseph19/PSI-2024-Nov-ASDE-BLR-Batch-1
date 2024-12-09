@@ -1,0 +1,86 @@
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-color: #f0f8ff; /* Light blue background */
+  color: #333;
+}
+
+/* Header styling */
+header {
+  background: #ff9800; /* Brighter orange */
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+header nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Section styling */
+section {
+  padding: 2rem;
+  margin-bottom: 4rem;
+}
+
+/* Footer styling */
+footer {
+  background: #ff9800; /* Brighter orange */
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+/* Ensure form fields are visible and not cut off */
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #fff; /* White background for form */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label,
+input {
+  margin: 0.5rem 0;
+}
+
+/* Form input styling */
+input[type='text'],
+input[type='email'] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Submit button styling */
+input[type='submit'] {
+  background-color: #4caf50; /* Green button */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input[type='submit']:hover {
+  background-color: #45a049;
+}
