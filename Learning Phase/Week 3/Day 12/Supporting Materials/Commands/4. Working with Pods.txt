@@ -1,14 +1,18 @@
 docker --version
 
-docker image build -t stevesam/getting-started-k8s:1.0 .  
+microk8s start
 
 microk8s kubectl api-versions
 
 microk8s kubectl cluster-info
 
 cd /mnt/d/Test/DevOps/Kubernetes/getting-started-k8s # cd to your HandOnDemos directory with the /getting-started-k8s folder.
+cd /mnt/d/HandsOnDemos/Sapient/ASDENOV2024/19.Kubernetes/getting-started-k8s
 
-wsl2ubuntu@Stephen-Samuels:/mnt/d/Test/DevOps/Kubernetes/getting-started-k8s$ code . # This will open the folder in VSCode
+wsl2ubuntu@Stephen-Samuels:/mnt/d/HandsOnDemos/Sapient/ASDENOV2024/19.Kubernetes/getting-started-k8s$ code . # This will open the folder in VSCode
+
+docker image build -t stevesam/getting-started-k8s:1.0 .  
+
 
 microk8s kubectl apply -f pod.yml 
 

@@ -17,7 +17,7 @@ public class UserRepository {
         String password = "password";
 
         try {
-
+            Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(url, username, password);
             System.out.println("Connected...");
         } catch (Exception e) {
