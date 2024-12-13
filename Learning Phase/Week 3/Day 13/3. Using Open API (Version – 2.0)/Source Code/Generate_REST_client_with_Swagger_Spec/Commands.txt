@@ -1,0 +1,7 @@
+
+npm install -g @openapitools/openapi-generator-cli 
+
+openapi-generator-cli version
+
+openapi-generator-cli generate -i BYTEX1-CustomerAPIv.2-1.0.0-resolved.yaml -g java -o ./BYTEX1-CustomerAPIv.2-1.0.0-resolved-generated-client
+
