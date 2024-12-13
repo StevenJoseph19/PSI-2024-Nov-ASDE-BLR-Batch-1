@@ -1,0 +1,152 @@
+swagger: '2.0'
+
+info:
+  version: 1.0.0
+  title: Customer API
+  description: This is the Custome API. It provides RESTful operations for Customer data.
+  contact:
+    name: Stephen Samuels
+    url: http://mycompany.com
+    email: stevesam1927@gmail.com
+  license:
+    name: Apache '2.0'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+paths:
+  /customer:
+    get:
+      summary: reads a customer's data
+      operationId: getCustomer
+      description: "This operation provides a view of the customers data in JSON.
+                   The operation uses the customers id to identify the customer 
+                   in a query string."
+      produces: 
+        - application/json
+        - application/xml
+      parameters:
+        - in: query
+          name: customerId
+          description:  pass a customer id to get customer data
+          required: true
+          type: integer
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            $ref: "#/definitions/Customer"
+        404:
+          description: employee with this id does not exist.
+    post:
+      summary: adds a new customer
+      operationId: addCustomer
+      description: Add a new customer to the system
+      produces:
+        - text/plain
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: the new customer data in JSON format
+          required: true
+          schema:
+            $ref: '#/definitions/Customer'
+      responses:
+        '200':
+          description: "sucessful operation"
+          schema:
+            type: integer
+        '405':
+          description: Invalid Input
+  /customer/{customerId}:
+    put:
+      summary: update existing customer
+      operationId: updateCustomer
+      description: Updates an existing customer with new data
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: the updated customer data in JSON format
+          required: true
+          schema:
+            $ref: "#/definitions/Customer"
+        - in: path
+          name: customerId
+          description: the id of the customer to update
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Success.
+        404:
+          description: Customer Not Found.
+        500:
+          description: Internal Server Error
+    delete:
+      summary: delete an existing customer
+      operationId: deleteCustomer
+      description: Deletes an existing customer in the system.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: customerId
+          description: the id of the customer to update
+          required: true
+          type: integer
+      responses:
+        200:
+          description: The customer was deleted.
+          schema:
+            $ref: "#/definitions/Customer"
+        404:
+          description: Customer Not Found.
+        500:
+          description: Internal Server Error
+definitions:
+  Customer:
+    type: object
+    properties:
+      customerId:
+        type: integer
+      accountValue:
+        type: number
+      customerName:
+        type: string
+      active:
+        type: boolean
+      address:
+        type: object
+        properties:
+          name:
+            type: string
+          street:
+            type: string
+          city:
+            type: string
+          state:
+            type: string
+          zip:
+            type: string
+      contacts:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+            phone:
+              type: string
+host: api.globomantics.com
+basePath: /crm/v1
+schemes:
+  - http
+  - https
+securityDefinitions:
+  BasicAuth:
+    type: basic
+security:
+  - BasicAuth: []
