@@ -1,0 +1,16 @@
+// jest.config.mjs
+export default {
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+  },
+};
+
+
+npm install --save-dev babel-jest @babel/preset-env
+
+.babelrc
+
+{
+  "presets": ["@babel/preset-env"]
+}
+npx jest 9-solution-1.test.js

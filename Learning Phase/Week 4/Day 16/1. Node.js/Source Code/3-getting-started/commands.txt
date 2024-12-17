@@ -1,0 +1,165 @@
+=================================
+Getting Started with Node
+=================================
+> Math.random()
+
+> let answer = 42;
+
+> 3 == '3'
+
+Ctrl+L  # Clears the REPL session
+
+> function today(){
+... return new Date();
+... }
+
+> .editor
+// Entering editor mode (Ctrl+D to finish, Ctrl+C to cancel)
+function add(x,y){
+   return x = y;
+
+ }
+
+ function random() {
+
+    return Math.random();
+
+  }
+
+Press CTRL + D to have the REPL evaluate your code
+
+> random()
+
+> .help
+
+CTRL + D
+
+$ node
+
+> function today(){
+... return new Date();
+... }
+
+> function add(x,y){
+...    return x = y;
+... }
+
+>  function random() {
+...     return Math.random();
+... }
+
+> .save m7.js
+
+$ more m7.js
+
+$ node
+
+> .load m7.js
+
+> cas
+
+> Array.
+
+> const arr = [];
+
+> arr.
+
+> .
+
+> 
+
+> Math.random()
+
+> _
+
+> const randomNumber = _
+
+> randomNumber
+
+$  cd /mnt/d/Test/FrontEnd/Node.js/Getting_Started
+
+$ code .
+
+1-executing-scripts$ node 1-hello-world.js
+
+1-executing-scripts$ cp 1-hello-world.js 1-hello-world.mjs 
+
+1-executing-scripts$ node 1-hello-world.mjs
+
+2-timers$ node 3-setTimeout-with-function-and-arguments.js
+
+2-timers$ node 5-setInterval-example.js
+
+
+$ node -v
+
+$ node -p "os.cpus().length"
+
+$ node -p "process.versions.v8"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

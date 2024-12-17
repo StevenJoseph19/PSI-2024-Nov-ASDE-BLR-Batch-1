@@ -1,0 +1,23 @@
+which node
+
+which npm
+
+node
+
+To quit the Node.js REPL (Read-Eval-Print Loop) shell in Ubuntu (or any Unix-based system), you can use any of the following methods:
+
+1. Using .exit Command:
+Simply type .exit and press Enter:
+
+.exit
+
+2. Using Ctrl + C:
+Press Ctrl + C twice. This will immediately exit the Node.js REPL.
+
+3. Using process.exit():
+You can also type process.exit() and press Enter to exit the Node.js shell:
+
+process.exit();
+
+4. Using Ctrl + D:
+Press Ctrl + D to exit the REPL.

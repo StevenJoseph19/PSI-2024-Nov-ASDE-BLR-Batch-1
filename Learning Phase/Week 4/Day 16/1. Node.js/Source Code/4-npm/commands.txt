@@ -1,0 +1,99 @@
+$ npm
+npm -v
+
+npm install -g npm
+
+mkdir test-npm
+cd test-npm
+npm i express
+ls
+ls node_modules/express
+
+cd 1-npm-command
+npm i express
+
+npm i lodash 
+ls
+
+rm -rf node_modules
+ls
+
+npm i
+
+cat node_modules/bytes/package.json
+
+npm i -D nodemon
+
+npm help install
+
+npm i lodash
+
+ls node_modules
+
+node test.js
+
+rm  -rf node_modules 
+node test.js
+
+ mkdir frame-print
+
+ node test/index.js
+
+ npm login
+
+cd ..
+cd frame-print
+
+npm init
+
+npm login
+
+npm whoami
+
+npm publish
+
+cd ../test
+
+npm i stevesam-frame-print
+
+node index.js
+
+node server.js
+
+^C
+
+npm run start
+
+npm test
+
+npx jest
+
+npm run check
+
+npx  eslint --init
+
+npm run check
+
+npm test
+
+npm i
+
+npm ls
+
+npm update
+
+npm i express
+
+npm uninstall express
+
+npm show request versions
+
+npm show lodash versions
+
+npm outdated
+
+npm update
+
+npm ls | less
+
+npm show lodash version
