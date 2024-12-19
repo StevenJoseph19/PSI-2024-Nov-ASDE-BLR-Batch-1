@@ -1,0 +1,197 @@
+Product API with Node.js and  MongoDB
+Step 1: Project Setup
+Initialize Node.js Project:
+
+mkdir product-api
+cd product-api
+npm init -y
+
+Install Dependencies:
+
+npm install express mongoose swagger-jsdoc swagger-ui-express body-parser
+npm install --save-dev nodemon  -------- not necessary if already installed globally.
+
+Step 2:Install MongoDB on your WSL:
+
+sudo apt update
+sudo apt upgrade
+wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+sudo apt update
+sudo apt install -y mongodb-org
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo systemctl status mongod
+
+$ mongosh
+Current Mongosh Log ID: 676443d958dc7fa9bb567a2a
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.7
+Using MongoDB:          6.0.19
+Using Mongosh:          2.3.7
+
+test> show dbs
+admin   40.00 KiB
+config  60.00 KiB
+local   40.00 KiB
+
+Set Up Scripts in package.json:
+
+"scripts": {
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+}
+
+Step 3: Create Server-Side Code
+Folder Structure:
+product-api/
+├── index.js
+├── models/
+│   └── product.js
+├── routes/
+│   └── productRoutes.js
+├── swagger/
+│   └── swaggerOptions.js
+├── db/
+│   └── connection.js
+└── package.json
+
+Step 4: Implement the above
+
+Step 5: Run the Application
+Start MongoDB 
+
+Run the server:
+
+npm run dev
+
+Server running at http://localhost:3000
+MongoDB connected
+
+Open your browser:
+
+Visit Swagger API Docs: http://localhost:3000/api-docs
+Test endpoints with tools like Postman or Swagger UI.
+
+Postman Configuration
+URL:
+
+http://localhost:3000/api/products
+Replace 3000 with your server's port if it's different.
+
+HTTP Method: POST
+
+Headers:
+
+Key: Content-Type
+Value: application/json
+Body: Select the raw option and use the following JSON data as an example:
+
+{
+  "name": "Wireless Mouse",
+  "price": 25.99,
+  "description": "A high-quality wireless mouse with ergonomic design."
+}
+
+Verify in the mongosh shell
+
+show dbs
+use products
+show collections
+db.products.find().pretty()
+
+GET all products
+http://localhost:3000/api/products
+
+GET a specific product
+http://localhost:3000/api/products/64b92c5034b548a2c23e9876
+Replace 64b92c5034b548a2c23e9876 with the actual _id of the product in your database.
+
+Update Product Endpoint
+HTTP Method: PUT
+
+URL:
+http://localhost:3000/api/products/:id
+
+Postman Configuration:
+
+URL:
+http://localhost:3000/api/products/64b92c5034b548a2c23e9876
+HTTP Method: PUT
+Headers:
+Content-Type: application/json
+Body (raw JSON):
+
+{
+  "name": "Updated Mouse",
+  "price": 29.99,
+  "description": "An updated description for the wireless mouse"
+}
+
+
+Update Product Endpoint
+HTTP Method: PUT
+
+URL:
+http://localhost:3000/api/products/:id
+
+
+// Update a product by ID
+router.put('/:id', async (req, res) => {
+  try {
+    const { name, price, description } = req.body;
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      { name, price, description },
+      { new: true, runValidators: true } // Returns the updated document
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    res.json({
+      message: 'Product updated successfully',
+      product: updatedProduct,
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating product', error: error.message });
+  }
+});
+Postman Configuration:
+
+URL:
+http://localhost:3000/api/products/64b92c5034b548a2c23e9876
+HTTP Method: PUT
+Headers:
+Content-Type: application/json
+Body (raw JSON):
+{
+  "name": "Updated Mouse",
+  "price": 29.99,
+  "description": "An updated description for the wireless mouse"
+}
+Expected Response:
+
+{
+  "message": "Product updated successfully",
+  "product": {
+    "_id": "64b92c5034b548a2c23e9876",
+    "name": "Updated Mouse",
+    "price": 29.99,
+    "description": "An updated description for the wireless mouse",
+    "__v": 0
+  }
+}
+
+Delete Product Endpoint
+HTTP Method: DELETE
+
+URL:
+http://localhost:3000/api/products/:id
+
+Postman Configuration:
+
+URL:
+http://localhost:3000/api/products/64b92c5034b548a2c23e9876
+HTTP Method: DELETE
