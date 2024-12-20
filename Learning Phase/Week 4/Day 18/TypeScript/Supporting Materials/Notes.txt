@@ -1,0 +1,51 @@
+On Windows command prompt:
+
+set NODE_OPTIONS=--openssl-legacy-provider
+On PowerShell:
+
+$env:NODE_OPTIONS = "--openssl-legacy-provider"
+
+function logPlayer(name) {
+  console.log(`New game starting for player: ${name}`);
+}
+
+  var messagesElement: HTMLElement | string | null;
+
+  let playerName: string = 'Audrey';
+  logPlayer(playerName);
+
+    if (typeof messagesElement == 'string') {
+    return messagesElement;
+  } else {
+    return messagesElement;
+  }
+============================================
+
+function getInputValue(elementID: string): string | undefined {
+
+  const inputElement: HTMLInputElement = <HTMLInputElement>document.getElementById(elementID);
+
+  if (inputElement.value === '') {
+    return undefined;
+  }
+  else {
+    return inputElement.value;
+  }  
+}
+
+function postScore(score: number, playerName: string = 'MultiMath Player'): void {
+
+  let logger: (value: string) => void;
+
+  if (score < 0) {
+    logger = logError;
+  }
+  else {
+    logger = logMessage;
+  }
+
+  const scoreElement: HTMLElement | null = document.getElementById('postedScores');
+  scoreElement!.innerText = `${score} - ${playerName}`;
+
+  logger(`Score: ${score}`);
+}
