@@ -1,0 +1,30 @@
+# Stop all running containers
+docker stop $(docker ps -q)
+
+# Remove all stopped containers
+docker rm $(docker ps -a -q)
+
+To ensure all containers related to Kafka and other services are removed, you can run:
+docker rm -f zookeeper kafka mysql connect mysqlterm
+
+Remove Docker Images
+Next, if you want to remove all Docker images (including Kafka, Zookeeper, MySQL, and Debezium), run:
+
+docker rmi $(docker images -q)
+
+To remove specific images (e.g., Kafka or MySQL):
+docker rmi debezium/kafka:1.0 mysql:5.7 debezium/connect:1.0
+
+
+Remove Docker Networks
+If you created a custom Docker network (kafka-net), you can remove it as well:
+docker network rm kafka-net
+
+
+Remove Docker Volumes
+Docker volumes store persistent data like MySQL data and Kafka logs. If you want to remove volumes as well, you can run:
+docker volume rm $(docker volume ls -q)
+
+
+Remove Docker Images and Containers (Optional)
+If you want to clear out all the Docker images and containers in your system to fully clean it up, run:

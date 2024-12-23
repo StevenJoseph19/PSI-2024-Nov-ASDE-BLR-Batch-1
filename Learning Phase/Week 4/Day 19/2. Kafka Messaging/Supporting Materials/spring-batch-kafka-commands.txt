@@ -1,0 +1,83 @@
+Setup
+==============================
+
+wsl --distribution Ubuntu 
+
+cd ~
+
+cd kafka_2.13-3.0.0
+
+Creating a Kafka Producer
+===========================
+
+Start Kafka Broker and Create a Topic
+Before running the application, ensure your Kafka broker is running, and the batch-topic topic exists.
+
+Using Kafka CLI:
+Start Kafka (if not already running):
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
+
+Create the batch-topic:
+
+bin/kafka-topics.sh --create --topic batch-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+Verify the topic:
+
+bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+Verify Messages in the Topic
+===============================================
+Use the Kafka CLI to check if there are any messages in the topic:
+
+bin/kafka-console-consumer.sh --topic batch-topic --bootstrap-server localhost:9092 --from-beginning
+
+======================================================================================================
+
+Producing Messages
+===============================
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic batch-topic
+
+Update server.properties
+==========================
+sudo nano ~kafka_2.13-3.0.0/config/server.properties
+
+broker.id=0
+
+listeners=PLAINTEXT://:9092
+advertised.listeners=PLAINTEXT://<WSL2_IP_ADDRESS>:9092 
+num.network.threads=3
+
+bin/kafka-server-stop.sh
+bin/kafka-server-start.sh config/server.properties
+
+To find the IP address of your WSL2 instance, follow these steps:
+==============================================================
+
+Open a terminal in WSL2: If you're already in the WSL2 terminal, that's great. Otherwise, open one by launching your WSL2 distribution (e.g., Ubuntu).
+
+Run the following command to show the network interfaces and their addresses:
+
+ip addr show eth0
+
+Look for the inet address in the output. This is your WSL2 IP address. It should look something like this:
+
+3: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.10/24 brd 192.168.1.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 xxxx::xxxx:xxxx:xxxx:xxxx/64 scope link
+       valid_lft forever preferred_lft forever
+Copy the IP address found after the inet field. In this example, the IP address is 192.168.1.10.
+
+Example
+If the IP address of your WSL2 instance is 192.168.1.10, then you would set the advertised.listeners property in your server.properties file like this:
+
+properties
+advertised.listeners=PLAINTEXT://192.168.1.10:9092
+After making this change, restart your Kafka server as previously.
+
+======================================================================
+

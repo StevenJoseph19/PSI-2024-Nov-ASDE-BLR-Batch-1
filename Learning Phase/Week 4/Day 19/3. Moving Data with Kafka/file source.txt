@@ -1,0 +1,9 @@
+wsl2ubuntu@DESKTOP-NOTGQ25:~/kafka_2.13-3.0.0$ bin/kafka-topics.sh   --create   --bootstrap-server  localhost:9092   --replication-factor 1   --partitions 1 --topic my-connect-test
+Created topic my-connect-test.
+
+wsl2ubuntu@DESKTOP-NOTGQ25:~/kafka_2.13-3.0.0$ bin/connect-standalone.sh my-standalone.properties my-file-source.properties
+
+wsl2ubuntu@DESKTOP-NOTGQ25:~/kafka_2.13-3.0.0$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-connect-test --from-beginning
+this is line 1
+this is line 2
+this is line 3

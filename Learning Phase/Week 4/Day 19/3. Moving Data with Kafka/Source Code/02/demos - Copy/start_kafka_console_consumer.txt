@@ -1,0 +1,22 @@
+docker exec -it kafka bash
+
+cd bin
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kafka -- to get the IP
+
+./kafka-topics.sh --list --bootstrap-server 172.17.0.3:9092
+
+or
+
+./kafka-topics.sh --list --bootstrap-server kafka:9092
+===========================================================
+globomantics: This is the main topic where the data from MySQL is being captured.
+globomantics.globomantics.articles: This topic specifically corresponds to changes in the articles table of the globomantics database.
+schema-changes: This topic stores the schema history for the database.
+
+
+[kafka@34dafd027400 bin]$ ./kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic globomantics.globomantics.articles --from-beginning
+
+./kafka-topics.sh --describe --bootstrap-server kafka:9092 --topic articles
+./kafka-consumer-groups.sh --bootstrap-server kafka:9092 --describe --group console-consumer-96545
+[kafka@34dafd027400 bin]$ ./kafka-consumer-groups.sh --bootstrap-server kafka:9092 --describe --group console-consumer-96545

@@ -1,0 +1,46 @@
+#Create a Docker network to allow containers to communicate
+docker network create kafka-net
+
+#Start Zookeeper
+docker run -it --rm --name zookeeper -p 2181:2181 -p 2888:2888 -p 3888:3888 --network kafka-net zookeeper:3.5.5
+
+#Start Kafka Broker
+docker run -it --rm --name kafka -p 9092:9092 --network kafka-net \
+-e ZOOKEEPER_CONNECT=zookeeper:2181 \
+debezium/kafka:1.0
+
+
+#Start MySQL (don't forget to replace the mysql.cnf path with the one pointing to the one in your filesystem)
+docker run -it --rm --name mysql --network kafka-net -p 3306:3306 -v /mnt/c/Users/steve/mysql-config/mysql.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+ -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=globomantics -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=globomantics mysql:5.7
+
+#Start MySQL terminal
+docker run -it --rm --name mysqlterm --network kafka-net mysql:5.7 \
+sh -c 'exec mysql -h mysql -P 3306 -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
+#Start Kafka Connect
+docker run -it --rm --name connect -p 8083:8083 \
+-e GROUP_ID=1 \
+-e CONFIG_STORAGE_TOPIC=kafka_connect_configs \
+-e OFFSET_STORAGE_TOPIC=kafka_connect_offsets \
+-e STATUS_STORAGE_TOPIC=kafka_connect_statuses \
+-e BOOTSTRAP_SERVERS=kafka:9092 \
+--network kafka-net \
+debezium/connect:1.0
+
+docker exec -it mysql mysql -u root -p
+docker exec -it mysql chmod 0444 /etc/mysql/mysql.conf.d/mysqld.cnf
+docker restart mysql
+
+SHOW VARIABLES LIKE 'log_bin';
+SHOW MASTER STATUS;
+
+curl -X DELETE localhost:8083/connectors/articles-connector
+
+Run command to recreate the articles-connector
+
+curl -X GET localhost:8083/connectors/articles-connector/status
+
+
+ 
+
