@@ -1,0 +1,1 @@
+driver.get("http://softwaretestingplace.blogspot.com/2015/10/sample-web-page-to-test.html");
