@@ -1,0 +1,55 @@
+npx create-react-app react-redux-demo --template typescript
+cd react-redux-demo
+
+npm install react@18 react-dom@18
+
+npm install @testing-library/react @testing-library/jest-dom jest ts-jest jest-environment-jsdom
+
+Folder Structure
+========================
+src/
+  ├── actions/
+  │   └── productActions.ts
+  ├── components/
+  │   ├── App.tsx
+  │   ├── ProductList.tsx
+  │   └── ProductForm.tsx
+  ├── reducers/
+  │   └── productReducer.ts
+  ├── store.ts
+  └── index.tsx
+
+
+Add tsconfig.json file to root.
+
+npm install --save-dev @types/react @types/react-dom
+
+npm install --save-dev @types/jest
+
+Create a Declaration File for SVGs
+Create a new declaration file, e.g., custom.d.ts, in the root of your src directory (or in the src/types folder if you have one). This file will tell TypeScript how to handle the import of .svg files.
+
+Example custom.d.ts:
+// src/custom.d.ts
+declare module "*.svg" {
+  const content: string;
+  export default content;
+}
+
+
+npm install web-vitals
+npm install redux react-redux
+npm install --save-dev @types/redux @types/react-redux
+
+
+
+
+
+
+
+
+
+
+
+
+

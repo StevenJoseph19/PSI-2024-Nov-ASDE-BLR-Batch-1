@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductForm Component renders the form correctly (snapshot) 1`] = `
+<DocumentFragment>
+  <form>
+    <input
+      placeholder="Name"
+      type="text"
+      value=""
+    />
+    <input
+      placeholder="Price"
+      type="text"
+      value=""
+    />
+    <button
+      type="submit"
+    >
+      Add Product
+    </button>
+  </form>
+</DocumentFragment>
+`;

@@ -1,0 +1,53 @@
+"jsx": "react-jsx", in tsconfig.json needed to run npm test so necessary to maintain separate tsconfig.json files for dev and prod
+
+npm install cross-env --save-dev # For dev and prod script
+
+npm install ignore-loader --save-dev # May need so build does not include test files
+
+gsutil -m rsync -R out gs://asde-project-management # sync the contents of the out directory with the specified Google Cloud Storage bucket (gs://asde-							    # project-management).
+
+gsutil iam ch allUsers:objectViewer gs://asde-project-management # grants public read access to the bucket, allowing everyone to view the contents.
+
+gsutil web set -m index.html -e 404.html gs://asde-project-management # configures the bucket to serve a static website, including specifying the main page 								      # and the 404 page.
+
+
+https://storage.googleapis.com/asde-project-management/index.html     # web site URL
+
+
+If your app relies on API endpoints (e.g., /api/products), those won't work with static exports (output: export) because static builds don't support server-side functionality.
+1. Deploy to a Platform with Serverless Support
+Option 1: Vercel
+Vercel is the recommended platform for Next.js apps and supports serverless API routes natively.
+
+Install Vercel CLI:
+
+npm install -g vercel
+
+Deploy:
+
+vercel
+Vercel will detect your Next.js app and deploy it with full support for pages/api routes.
+
+Test the Deployment:
+
+Open the URL provided by Vercel.
+Check both the frontend and the API endpoints.
+
+Option 2: Google App Engine
+You can use Google App Engine for dynamic deployment.
+
+Update package.json: Add a start script:
+
+"scripts": {
+  "start": "next start"
+}
+Create app.yaml:
+
+runtime: nodejs18
+env: standard
+Deploy to App Engine:
+
+gcloud app deploy
+This will deploy your app, including API routes, on Google App Engine.
+
+======================================================================================================================
