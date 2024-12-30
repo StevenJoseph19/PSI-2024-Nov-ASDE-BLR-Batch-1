@@ -5,6 +5,12 @@ npm install react@18 react-dom@18
 
 npm install @testing-library/react @testing-library/jest-dom jest ts-jest jest-environment-jsdom
 
+npm install redux react-redux
+
+npm install --save-dev @types/redux @types/react-redux
+
+npm install web-vitals
+
 Folder Structure
 ========================
 src/
@@ -37,9 +43,9 @@ declare module "*.svg" {
 }
 
 
-npm install web-vitals
-npm install redux react-redux
-npm install --save-dev @types/redux @types/react-redux
+
+
+
 
 
 

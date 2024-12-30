@@ -4,14 +4,16 @@ npm install cross-env --save-dev # For dev and prod script
 
 npm install ignore-loader --save-dev # May need so build does not include test files
 
-gsutil -m rsync -R out gs://asde-project-management # sync the contents of the out directory with the specified Google Cloud Storage bucket (gs://asde-							    # project-management).
+gcloud config set project stesamue2-product-management
 
-gsutil iam ch allUsers:objectViewer gs://asde-project-management # grants public read access to the bucket, allowing everyone to view the contents.
+gsutil -m rsync -R out gs://stesamue2-product-api # sync the contents of the out directory with the specified Google Cloud Storage bucket (gs://asde-							    # project-management).
 
-gsutil web set -m index.html -e 404.html gs://asde-project-management # configures the bucket to serve a static website, including specifying the main page 								      # and the 404 page.
+gsutil iam ch allUsers:objectViewer gs://stesamue2-product-api  # grants public read access to the bucket, allowing everyone to view the contents.
+
+gsutil web set -m index.html -e 404.html gs://stesamue2-product-api # configures the bucket to serve a static website, including specifying the main page 								      # and the 404 page.
 
 
-https://storage.googleapis.com/asde-project-management/index.html     # web site URL
+https://storage.googleapis.com/stesamue2-product-api/index.html     # web site URL
 
 
 If your app relies on API endpoints (e.g., /api/products), those won't work with static exports (output: export) because static builds don't support server-side functionality.
